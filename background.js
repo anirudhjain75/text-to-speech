@@ -1,11 +1,11 @@
 chrome.runtime.onInstalled.addListener(function () {
-    var synth = window.speechSynthesis;
-    
     chrome.tabs.onUpdated.addListener(function (tabId, changeInfo , tab) {
         if (tab.status == "complete") {
             console.log(tab);
-            var utterThis = new SpeechSynthesisUtterance("Opening " + tab.url);
-            synth.speak(utterThis);
+            var utterThis = new SpeechSynthesisUtterance();
+            utterThis.text = "Opening " + tab.url;
+            utterThis.lang = "en-US"
+            speechSynthesis.speak(utterThis);
             chrome.tabs.sendMessage(tabId, {action: 'GET_CONTENT'});
         }
     })
@@ -15,7 +15,7 @@ chrome.runtime.onInstalled.addListener(function () {
             postFrom.onMessage.addListener(function (message) {
                 console.log(message.payload.content);
                 var utterThis = new SpeechSynthesisUtterance(message.payload.content);
-                synth.speak(utterThis)
+                speechSynthesis.speak(utterThis)
             })
         }
     })
