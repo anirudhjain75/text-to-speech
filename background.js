@@ -3,7 +3,7 @@ chrome.runtime.onInstalled.addListener(function () {
         if (tab.status == "complete") {
             console.log(tab);
             var utterThis = new SpeechSynthesisUtterance();
-            utterThis.text = "Opening " + tab.url;
+            utterThis.text = "Opening " + tab.title;
             utterThis.lang = "en-US"
             speechSynthesis.speak(utterThis);
             chrome.tabs.sendMessage(tabId, {action: 'GET_CONTENT'});
