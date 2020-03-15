@@ -1,0 +1,17 @@
+{
+    "name": "Text to Speech",
+    "version": "1.0",
+    "description": "Converts text to speech based on accessibility tags",
+    "manifest_version": 2,
+    "permissions": ["tabs", "activeTab"],
+    "background": {
+        "scripts": ["background.js"],
+        "persistent": true
+    },
+    "content_scripts": [
+        {
+            "matches": ["http://*/*", "https://*/*"],
+            "js": ["contentScript.js"]
+        }
+    ]
+}
